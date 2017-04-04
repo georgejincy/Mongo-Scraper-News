@@ -1,0 +1,32 @@
+{
+  "name": "mongoscraper",
+  "version": "1.0.0",
+  "description": "An app that scrapes news from another website using Mongoose and c=Cheerio",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/georgejincy/Mongo-Scraper-News.git"
+  },
+  "keywords": [
+    "Mongodb",
+    "cheerio",
+    "nodejs"
+  ],
+  "author": "Jincy George",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/georgejincy/Mongo-Scraper-News/issues"
+  },
+  "homepage": "https://github.com/georgejincy/Mongo-Scraper-News#readme",
+  "dependencies": {
+    "body-parser": "^1.17.1",
+    "cheerio": "^0.22.0",
+    "express": "^4.15.2",
+    "express-handlebars": "^3.0.0",
+    "mongoose": "^4.9.3",
+    "request": "^2.81.0"
+  }
+}
