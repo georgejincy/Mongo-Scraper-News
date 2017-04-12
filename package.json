@@ -1,7 +1,7 @@
 {
   "name": "mongoscraper",
   "version": "1.0.0",
-  "description": "An app that scrapes news from another website using Mongoose and c=Cheerio",
+  "description": "An app that scrapes information from another website using Mongoose and c=Cheerio",
   "main": "server.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
@@ -27,6 +27,7 @@
     "express": "^4.15.2",
     "express-handlebars": "^3.0.0",
     "mongoose": "^4.9.3",
+    "morgan": "^1.8.1",
     "request": "^2.81.0"
   }
 }
