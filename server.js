@@ -7,19 +7,15 @@
 var express = require("express");
 var bodyParser = require("body-parser");
 var exphbs = require("express-handlebars");
+var helpers = require('handlebars-helpers');
+var math = helpers.math();
 var request = require("request");
 var cheerio = require("cheerio");
 var logger = require("morgan");
 var mongoose = require('mongoose');
 // Set mongoose to leverage built in JavaScript ES6 Promises
 mongoose.Promise = Promise;
-/*mongoose.connect('mongodb://localhost/test');
-var db = mongoose.connection;
-db.on('error', console.error.bind(console, 'connection error:'));
-db.once('open', function() {
-  // we're connected!
-  console.log("We are connected!")
-});*/
+
 
 // Sets up the Express App
 // =============================================================
@@ -77,33 +73,21 @@ app.get("/scrape", function(req, res){
 			var imgLink = $(this).children('.entry-content').find('img').attr('src');
 			var body = $(this).children('.entry-content').find('p').text();
 			var articleLink = $(this).children('.entry-content').find('a.moretag').attr('href');
-			console.log(imgLink);
-			console.log(title);
-			console.log(body);
-			console.log(articleLink);
+			console.log(i);
+			var id = i;
+			console.log(" Title | " + title +" imglink | "+ imgLink + " body | " + body + " articleLink | " + articleLink);
 			console.log("-------------------\n")
-			/*var link = $(this).children("a").attr("href");
-			console.log(" Title | " + title +" imglink | "+ imglink + " body | " + body + " articleLink | " + articleLink);*/
 
-		/*	if(title && articleLink){
+		if(title && imgLink){
 				var newArticle = {
 				"title": title,
 				"imgLink": imgLink,
 				"body": body,
-				"articleLink": articleLink
+				"articleLink": articleLink,
+				"id": id
 				}
 				obArr.push(newArticle);
-
-			}	*/	
-			if(title && imgLink){
-				var newArticle = {
-				"title": title,
-				"imgLink": imgLink
-				}
-				obArr.push(newArticle);
-
-			}			
-
+			}		
 
 		});
 

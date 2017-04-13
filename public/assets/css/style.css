@@ -1,0 +1,71 @@
+.header {
+  text-align: center;
+  background-image: url('https://static.pexels.com/photos/175709/pexels-photo-175709.jpeg');
+  background-size: 100%;
+  background-position:50% 50%;
+  position: relative;
+  overflow: visible;
+  padding-top: 2.5rem;
+  padding-bottom: 7.9rem; }
+  .header .headline {
+    color: #cc6666; 
+    background-color: white;
+  image-rendering: -webkit-optimize-contrast;
+  }
+
+.button {
+  border-radius: 20%;
+}
+
+#start-scrape{
+  padding: 20px;
+  margin-top: 30px;
+}
+
+.header-subnav {
+  float: none;
+  position: absolute;
+  text-align: center;
+  margin: 0 auto;
+  background-color: #cc9966;
+  bottom: 0;
+  width: 100%; }
+  .header-subnav li {
+    float: none;
+    display: inline-block; 
+
+  }
+    .header-subnav li a {
+      padding: 0.9rem 1rem;
+      font-size: 1.25rem;
+      color: #cc6666;
+      text-transform: uppercase;
+      display: block;
+      font-weight: bold;
+      letter-spacing: 1px;
+      transition: all 0.35s ease-in-out; }
+      .header-subnav li a.is-active {
+        background-color: #66cc66;
+        background-blend-mode: screen; }
+      .header-subnav li a:hover {
+        background-color: #66cc66;
+        background-blend-mode: screen;
+        transition: all 0.35s ease-in-out; }
+.callout{
+  padding: 20px;
+}
+.article-body{
+  font-size: 20px;
+}
+.article-image{
+  padding-right: 10px;
+}
+.article-link{
+  font-size: 18px;
+  color: #cc6666;
+}
+.article-title{
+  border-bottom: 2px solid #ccc;
+  color: #cc6666;
+  font-family: 'Lobster Two', cursive;
+}
