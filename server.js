@@ -97,6 +97,16 @@ app.get("/scrape", function(req, res){
 	
 });
 
+// api route to save an article
+app.post('/api/savearticle', function(req, res){
+
+	var newArticle = req.body.newArticle;
+
+	//save article to DB
+	
+
+});
+
 app.listen(PORT, function() {
     console.log("App listening on PORT " + PORT);
   });
