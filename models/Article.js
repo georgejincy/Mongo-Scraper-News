@@ -16,10 +16,12 @@ var ArticleSchema = new Schema ({
   articleLink: {
     type: String
   },
-  comment: {
+  comment: [{
+    // Store ObjectIds in the array
     type: Schema.Types.ObjectId,
+    // The ObjectIds will refer to the ids in the Comment model
     ref: "Comment"
-  }
+  }]
 	
 });
 

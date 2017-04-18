@@ -13,10 +13,6 @@
   image-rendering: -webkit-optimize-contrast;
   }
 
-.button {
-  border-radius: 20%;
-}
-
 #start-scrape{
   padding: 20px;
   margin-top: 30px;
@@ -68,4 +64,18 @@
   border-bottom: 2px solid #ccc;
   color: #cc6666;
   font-family: 'Lobster Two', cursive;
+}
+.delete-article{
+  background-color: #ff3333;
+  margin-left: 30px;
+}
+.savedNote {
+  border: 1px solid #808080;
+}
+
+.x-close{
+  background-color: #ff3333;
+  display: block;
+  width: 10px;
+  color: white;
 }

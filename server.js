@@ -15,6 +15,9 @@ var logger = require("morgan");
 var mongoose = require('mongoose');
 // Set mongoose to leverage built in JavaScript ES6 Promises
 mongoose.Promise = Promise;
+// Requiring our Article and Comment models
+var Article = require("./models/Article.js");
+var Comments = require("./models/Comments.js");
 
 
 // Sets up the Express App
@@ -56,7 +59,7 @@ db.once("open", function() {
 // ROUTES
 // ---------------
 
-// Route for root
+// Route for home
 app.get("/", function(req, res){
 	res.render("index", {});
 });
@@ -91,8 +94,36 @@ app.get("/scrape", function(req, res){
 
 		});
 
-		res.render("index", {Article: obArr});
+		//Handlebar object variable
+		var hbsObject = {
+			homeTabIsActive: true,
+			Article: obArr
+		};
+
+		res.render("index", hbsObject);
 	
+	});
+	
+});
+
+// Route for getting saved articles from DB
+app.get("/saved", function(req, res){
+
+	Article.find({}, function(err, data){
+		if(err){
+			console.log(err);
+		}
+		else{
+
+			console.log(data);
+
+			var hbsObject = {
+				savedTabIsActive : true,
+				SavedArticle : data
+			};
+
+			res.render('saved', hbsObject);
+		}
 	});
 	
 });
@@ -100,12 +131,116 @@ app.get("/scrape", function(req, res){
 // api route to save an article
 app.post('/api/savearticle', function(req, res){
 
-	var newArticle = req.body.newArticle;
+	console.log(req.body.newArticle);
+	console.log(req.body);
+
+	var entry = new Article(req.body);
+
+	entry.save(function(err,doc){
+		// Log any errors
+        if (err) {
+          console.log(err);
+        }
+        // Or log the doc
+        else {
+          console.log(doc);
+        }
+	});
 
 	//save article to DB
-	
+
 
 });
+
+// api route to save an note
+app.post('/api/savenote/:id', function(req, res){
+	console.log('req.body--------------');
+	console.log(req.body.newComment);
+
+	var newComment = new Comments(req.body.newComment);
+
+	newComment.save(function(err,doc){
+		// Log any errors
+        if (err) {
+          console.log(err);
+        }
+        // Or log the doc
+        else {
+        	// Find article and push the new comment id into the Article's comment array
+     		Article.findOneAndUpdate({"_id": req.params.id}, { $push: { "comment": doc._id } }, { new: true }, function(err, newdoc) {
+	        // Send any errors to the browser
+	        if (err) {
+	          res.send(err);
+	        }
+	        // Or send the newdoc to the browser
+	        else {
+	          res.send(newdoc);
+	     	}
+      		});
+    	}
+	});
+
+	//save note to DB
+
+
+});
+
+//Route for deleting Saved Articles
+app.delete("/api/deletearticle/:id", function(req, res){
+
+	Article.findByIdAndRemove(req.params.id, function(err){
+		if(err) {
+			res.send(err);
+		}else{
+			console.log("Article deleted successfully");
+		}
+		
+	});
+
+});
+
+//Route for deleting Saved Comments
+app.delete("/api/deletecomment/:id", function(req, res){
+
+	Comments.findByIdAndRemove(req.params.id, function(err){
+		if(err) {
+			res.send(err);
+		}else{
+			console.log("Comment deleted successfully");
+			res.redirect('/saved');
+		}
+		
+	});
+
+});
+
+// Route for getting saved notes for an article from DB
+app.get("/savedNotes/:id", function(req, res){
+
+	Article.findOne({"_id": req.params.id})
+	.populate("comment")
+
+	.exec(function(err, data){
+		if(err){
+			console.log(err);
+		}
+		else{
+			console.log("saved notes=====")
+			console.log(data);
+
+			var hbsObject = {
+				savedTabIsActive : true,
+				id: req.params.id,
+				/*title: data[0].title.substr(0,30).concat('....'),*/
+				SavedNotes : data
+			};
+
+			res.render('notes', hbsObject);
+		}
+	});
+	
+});
+
 
 app.listen(PORT, function() {
     console.log("App listening on PORT " + PORT);
