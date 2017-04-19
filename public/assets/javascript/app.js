@@ -18,7 +18,7 @@ $(document).ready(function() {
 	}
 
 			
-	$('.save').on("click", function(event){
+	$('.save-article').on("click", function(event){
 
 		event.preventDefault();
 		var id = $(this).data('id');
@@ -40,7 +40,7 @@ $(document).ready(function() {
 
 	});
 
-	$('.savenote').on("click", function(event){
+	$('.save-comment').on("click", function(event){
 
 		event.preventDefault();
 		var id = $(this).data('id');
@@ -73,7 +73,21 @@ $(document).ready(function() {
 		})
 		.done(function(){
 			window.location.href = "/saved";
+		});
+
+
+	});
+
+	$('.delete-comment').on('click', function(event) {
+		
+		var id = $(this).data('id');
+		$.ajax({
+			method: "DELETE",
+			url: "/api/deletecomment/" + id
 		})
+		.done(function(){
+			//window.location.href = "/saved";
+		});
 
 
 	});

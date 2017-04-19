@@ -131,10 +131,23 @@ app.get("/saved", function(req, res){
 // api route to save an article
 app.post('/api/savearticle', function(req, res){
 
-	console.log(req.body.newArticle);
+	console.log("save an article----------");
 	console.log(req.body);
-
 	var entry = new Article(req.body);
+
+	Article.update(
+		{"title": req.body.title},
+		{$setOnInsert: entry},
+		{upsert: true},
+		 function (err, doc) {
+
+			if(err){
+				console.log(err);
+			}
+
+			});
+
+	/*
 
 	entry.save(function(err,doc){
 		// Log any errors
@@ -147,13 +160,13 @@ app.post('/api/savearticle', function(req, res){
         }
 	});
 
-	//save article to DB
+	//save article to DB*/
 
 
 });
 
 // api route to save an note
-app.post('/api/savenote/:id', function(req, res){
+app.post('/api/savenote', function(req, res){
 	console.log('req.body--------------');
 	console.log(req.body.newComment);
 
@@ -167,7 +180,7 @@ app.post('/api/savenote/:id', function(req, res){
         // Or log the doc
         else {
         	// Find article and push the new comment id into the Article's comment array
-     		Article.findOneAndUpdate({"_id": req.params.id}, { $push: { "comment": doc._id } }, { new: true }, function(err, newdoc) {
+     		Article.findOneAndUpdate({"_id": req.body.articleId}, { $push: { "comment": doc._id } }, { new: true }, function(err, newdoc) {
 	        // Send any errors to the browser
 	        if (err) {
 	          res.send(err);
@@ -193,6 +206,7 @@ app.delete("/api/deletearticle/:id", function(req, res){
 			res.send(err);
 		}else{
 			console.log("Article deleted successfully");
+			res.redirect('/saved');
 		}
 		
 	});
@@ -207,7 +221,7 @@ app.delete("/api/deletecomment/:id", function(req, res){
 			res.send(err);
 		}else{
 			console.log("Comment deleted successfully");
-			res.redirect('/saved');
+			
 		}
 		
 	});
@@ -232,7 +246,7 @@ app.get("/savedNotes/:id", function(req, res){
 				savedTabIsActive : true,
 				id: req.params.id,
 				/*title: data[0].title.substr(0,30).concat('....'),*/
-				SavedNotes : data
+				SavedNotes : data.comment
 			};
 
 			res.render('notes', hbsObject);

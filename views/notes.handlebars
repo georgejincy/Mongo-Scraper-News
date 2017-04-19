@@ -4,13 +4,13 @@
 	<hr />
 	<div class = "savedNotes">
 		{{#each SavedNotes}}
-		<p class = "savedNote" data-id={{this.id}}> {{this.comment}} <div class="x-close"><a href="/deletenote">x</a></div></p>
+		<p class = "savedNote" data-id={{this.id}}> {{this.comment}} <div class="x-close delete-comment"><button type="button" data-id={{this.id}} class = "delete-comment">x</button></div></p>
 		{{/each}}
 	</div>
 	<div class="row">
 		<div class="small-12 columns">
 			<textarea id = "{{add 'comment' this.id}}" placeholder="New Note"></textarea>
-			<button type = "button" data-id = {{this.id}} class="button float-right savenote">SAVE NOTE</a>
+			<button type = "button" data-id = {{this.id}} class="button float-right save-comment">SAVE NOTE</a>
 		</div>
 	</div>
 
