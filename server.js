@@ -115,6 +115,9 @@ app.get("/saved", function(req, res){
 		}
 		else{
 
+			if(!data){
+				console.log("No saved articles");
+			}
 			console.log(data);
 
 			var hbsObject = {
@@ -144,6 +147,9 @@ app.post('/api/savearticle', function(req, res){
 			if(err){
 				console.log(err);
 			}
+
+
+			
 
 			});
 
