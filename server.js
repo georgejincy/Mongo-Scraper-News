@@ -42,7 +42,7 @@ app.set("view engine", "handlebars");
 
 // Setup Mongoose
 // ---------------
-mongoose.connect("mongodb://localhost/diyscraper");
+mongoose.connect("mongodb://heroku_wz3rfh94:krur096070rip01qhjn08vlfri@ds163340.mlab.com:63340/heroku_wz3rfh94");
 // Save our mongoose connection to db
 var db = mongoose.connection;
 
