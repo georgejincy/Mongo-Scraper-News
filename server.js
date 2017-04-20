@@ -207,14 +207,14 @@ app.post('/api/savenote', function(req, res){
 //Route for deleting Saved Articles
 app.delete("/api/deletearticle/:id", function(req, res){
 
-	Article.findByIdAndRemove(req.params.id, function(err){
+	Article.findByIdAndRemove(req.params.id, function(err, doc){
 		if(err) {
 			res.send(err);
 		}else{
 			console.log("Article deleted successfully");
-			//Set HTTP method to GET
-    		req.method = 'GET'
-			res.redirect('/saved');
+			res.json(doc);
+			
+			//res.redirect('/saved');
 		}
 		
 	});
@@ -224,11 +224,12 @@ app.delete("/api/deletearticle/:id", function(req, res){
 //Route for deleting Saved Comments
 app.delete("/api/deletecomment/:id", function(req, res){
 
-	Comments.findByIdAndRemove(req.params.id, function(err){
+	Comments.findByIdAndRemove(req.params.id, function(err, doc){
 		if(err) {
 			res.send(err);
 		}else{
 			console.log("Comment deleted successfully");
+			res.json(doc);
 			
 		}
 		

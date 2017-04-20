@@ -65,13 +65,16 @@ $(document).ready(function() {
 	});
 
 	$('.delete-article').on('click', function(event) {
+		console.log("Delete article button clicked");
 		
 		var id = $(this).data('id');
 		$.ajax({
 			method: "DELETE",
 			url: "/api/deletearticle/" + id
 		})
-		.done(function(){
+		.done(function(data){
+			console.log(data);
+			console.log("Inside done function");
 			window.location.href = "/saved";
 		});
 
@@ -85,7 +88,7 @@ $(document).ready(function() {
 			method: "DELETE",
 			url: "/api/deletecomment/" + id
 		})
-		.done(function(){
+		.done(function(data){
 			//window.location.href = "/saved";
 		});
 
