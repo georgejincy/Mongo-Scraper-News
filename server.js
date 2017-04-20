@@ -115,7 +115,7 @@ app.get("/saved", function(req, res){
 		}
 		else{
 
-			if(!data){
+			if(data.length === 0){
 				console.log("No saved articles");
 			}
 			console.log(data);
@@ -212,6 +212,8 @@ app.delete("/api/deletearticle/:id", function(req, res){
 			res.send(err);
 		}else{
 			console.log("Article deleted successfully");
+			//Set HTTP method to GET
+    		req.method = 'GET'
 			res.redirect('/saved');
 		}
 		
