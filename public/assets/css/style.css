@@ -5,17 +5,33 @@
   background-position:50% 50%;
   position: relative;
   overflow: visible;
+  z-index: 1;
   padding-top: 2.5rem;
   padding-bottom: 7.9rem; }
+
+  iframe{
+    position: relative;
+  }
   .header .headline {
-    color: #cc6666; 
-    background-color: white;
+    color: white; 
+    top: 20%;
+    left: 47%;
+    position: absolute;
+    background-color: #cc6666;
+    z-index: 2
+    background-color: none;
+    border: 4px solid #66cc66;
+    width: 300px;
   image-rendering: -webkit-optimize-contrast;
   }
 
 #start-scrape{
   padding: 20px;
   margin-top: 30px;
+  position: absolute;
+  z-index: 3;
+  top:40%;
+    left: 44%;
 }
 
 .header-subnav {
